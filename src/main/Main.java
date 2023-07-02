@@ -7,13 +7,16 @@ public class Main {
     public static void main(String[] args){
 
         JFrame window = new JFrame();
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Pacman");
-
         GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
 
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setSize(gamePanel.screenWidth, gamePanel.screenHeight);
+        window.setResizable(true);
+        window.setTitle("Pacman");
+        window.setIconImage(new ImageIcon("src/assets/icon.png").getImage());
+
+        window.add(gamePanel);
+        
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
