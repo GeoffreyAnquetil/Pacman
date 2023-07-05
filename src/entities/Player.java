@@ -2,6 +2,7 @@ package entities;
 
 import main.GamePanel;
 import main.KeyHandler;
+import map.TileManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,11 +27,13 @@ public class Player extends Entity {
 
     GamePanel gamePanel;
     KeyHandler keyHandler;
+    TileManager tileManager;
 
-    public Player(GamePanel gp, KeyHandler kh) {
+    public Player(GamePanel gp, KeyHandler kh, TileManager tm) {
 
         gamePanel = gp;
         keyHandler = kh;
+        tileManager = tm;
 
         xPos = 100;
         yPos = 100;

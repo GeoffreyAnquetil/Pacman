@@ -1,6 +1,7 @@
 package main;
 
 import entities.Player;
+import map.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +13,16 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 1;
 
     public final int tileSize = unscaledTileSize * scale;
-    final int maxScreenCol = 28;
-    final int maxScreenRow = 31;
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public final int maxScreenCol = 28;
+    public final int maxScreenRow = 31;
+    final int screenWidth = tileSize * maxScreenCol + 15;
+    final int screenHeight = tileSize * maxScreenRow + 40;
 
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyHandler);
+    TileManager tileManager = new TileManager(this);
+
+    Player player = new Player(this, keyHandler, tileManager);
 
     public GamePanel(){
         this.setSize(new Dimension(screenWidth, screenHeight));
@@ -41,8 +44,6 @@ public class GamePanel extends JPanel implements Runnable {
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null){
-
-            System.out.println(player.getxPos() + " " + player.getyPos());
 
             //Update en position
             update();
@@ -80,6 +81,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.white);
+
+        // Dessin de la carte
+        tileManager.drawmap(g2);
 
         player.draw(g2);
 
